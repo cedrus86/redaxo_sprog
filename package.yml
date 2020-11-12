@@ -24,7 +24,19 @@ page:
     subpages:
         wildcard:
             title: 'translate:wildcard'
-        copy:
+        dummy_add: 
+            title: 'sprog-dummy-add'
+            perm: sprog[add_wildcard]
+            hidden: true
+        dummy_delete: 
+            title: 'sprog-dummy-delete'
+            perm: sprog[delete_wildcard]
+            hidden: true
+        dummy_modify: 
+            title: 'sprog-dummy-modfiy'
+            perm: sprog[modify_wildcard]
+            hidden: true
+      copy:
             title: 'translate:copy_content'
             perm: admin[]
             subpages:
