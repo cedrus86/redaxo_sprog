@@ -95,7 +95,7 @@ if ($func == '') {
     $list->addTableAttribute('class', 'table-striped');
 
     $tdIcon = '<i class="rex-icon rex-icon-refresh"></i>';
-    $thIcon = rex::getUser()->getComplexPerm('clang')->hasAll() ? '<a href="'.$list->getUrl(['func' => 'add']).'#wildcard"'.rex::getAccesskey($this->i18n('add'), 'add').'><i class="rex-icon rex-icon-add-article"></i></a>' : '';
+    $thIcon = (rex::getUser()->getComplexPerm('clang')->hasAll() && rex::getUser()->hasPerm('sprog[add_wildcard]')) ? '<a href="'.$list->getUrl(['func' => 'add']).'#wildcard"'.rex::getAccesskey($this->i18n('add'), 'add').'><i class="rex-icon rex-icon-add-article"></i></a>' : '';
 
     $list->addColumn($thIcon, $tdIcon, 0, ['<th class="rex-table-icon">###VALUE###</th>', '###VALUE###']);
     $list->setColumnParams($thIcon, ['func' => 'edit', 'pid' => '###pid###']);
@@ -121,7 +121,7 @@ if ($func == '') {
     $list->setColumnParams('edit', ['func' => 'edit', 'pid' => '###pid###']);
     $list->setColumnFormat('edit', 'custom', 'sprogStyleTdEdit');
 
-    if (rex::getUser()->getComplexPerm('clang')->hasAll()) {
+    if (rex::getUser()->getComplexPerm('clang')->hasAll()&& rex::getUser()->hasPerm('sprog[delete_wildcard]')) {
         $list->addColumn('delete', '<i class="rex-icon rex-icon-delete"></i> '.$this->i18n('delete'));
         $list->setColumnLabel('delete', $this->i18n('function'));
         $list->setColumnLayout('delete', ['', '###VALUE###']);
@@ -154,7 +154,7 @@ if ($func == '') {
     $form->setLanguageSupport('id', 'clang_id');
     $form->setEditMode($func == 'edit');
 
-    if (rex::getUser()->getComplexPerm('clang')->hasAll()) {
+   if (rex::getUser()->getComplexPerm('clang')->hasAll() && rex::getUser()->hasPerm('sprog[modify_wildcard]')) {
         $field = $form->addTextField('wildcard', rex_request('wildcard_name', 'string', null));
         $field->setNotice($this->i18n('wildcard_without_tag'));
     } else {
